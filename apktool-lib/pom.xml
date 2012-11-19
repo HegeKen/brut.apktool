@@ -33,6 +33,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>brut/androlib/android-framework.jar</include>
+                    <include>brut/androlib/aapt-oppo</include>
                 </includes>
             </resource>
         </resources>

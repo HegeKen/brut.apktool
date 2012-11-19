@@ -151,7 +151,14 @@ final public class AndrolibResources {
             boolean update, boolean framework) throws AndrolibException {
         List<String> cmd = new ArrayList<String>();
 
-        cmd.add("aapt");
+        if (framework) {
+            File aaptFile = getAaptFile();
+            aaptFile.setExecutable(true);
+            cmd.add(aaptFile.getPath());
+        } else {
+            cmd.add("aapt");
+        }
+
         cmd.add("p");
         if (update) {
             cmd.add("-u");
@@ -484,6 +491,13 @@ final public class AndrolibResources {
         }
     }
 
+    public File getAaptFile() throws AndrolibException {
+        try {
+            return Jar.getResourceAsFile("/brut/androlib/aapt-oppo");
+        } catch (BrutException ex) {
+            throw new AndrolibException(ex);
+        }
+    }
 
     // TODO: dirty static hack. I have to refactor decoding mechanisms.
     public static boolean sKeepBroken = false;
